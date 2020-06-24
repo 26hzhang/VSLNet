@@ -1,7 +1,9 @@
 # Span-based Localizing Network for Natural Language Video Localization
 
 This is **TensorFlow** implementation for the paper "Span-based Localizing Network for Natural Language Video 
-Localization" (**ACL 2020**, long paper): [https://arxiv.org/abs/2004.13931](https://arxiv.org/abs/2004.13931).
+Localization" (**ACL 2020**, long paper): 
+[https://www.aclweb.org/anthology/2020.acl-main.585.pdf](https://www.aclweb.org/anthology/2020.acl-main.585.pdf), 
+[https://arxiv.org/abs/2004.13931](https://arxiv.org/abs/2004.13931).
 
 ![overview](/figures/overview.jpg)
 
@@ -76,11 +78,15 @@ python run_tacos.py --mode test
 ## Citation
 If you feel this project helpful to your research, please cite our work.
 ```
-@inproceedings{zhang2020vslnet,
+@inproceedings{zhang2020span,
     title = "Span-based Localizing Network for Natural Language Video Localization",
     author = "Zhang, Hao  and Sun, Aixin  and Jing, Wei  and Zhou, Joey Tianyi",
     booktitle = "Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics",
+    month = jul,
     year = "2020",
-    publisher = "Association for Computational Linguistics"
+    address = "Online",
+    publisher = "Association for Computational Linguistics",
+    url = "https://www.aclweb.org/anthology/2020.acl-main.585",
+    pages = "6543--6554",
 }
 ```
