@@ -37,7 +37,7 @@ data from [Box Drive](https://app.box.com/s/anywugpxlt134r9hzqf5v3v5xohxliwu), a
 **Data Pre-processing**  
 ```shell script
 # pre-processing the Charades-STA dataset, `feature` argument indicates whether to use 
-# visual features fine-tuned on Charades dataset (`finetune`) or w/o fintune (`raw`).
+# visual features finetuned on Charades dataset (`finetune`) or w/o finetune (`raw`).
 python run_charades.py --mode prepro --feature finetune
 
 # pre-processing the ActivityNet Captions dataset
