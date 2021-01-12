@@ -131,6 +131,8 @@ dmypy.json
 # add
 .idea/
 ckpt/
+ckpt_t7/
+ckpt*/
 data/
 datasets/
 .DS_Store

@@ -1,14 +1,14 @@
 # Span-based Localizing Network for Natural Language Video Localization
 
 This is **TensorFlow** implementation for the paper "Span-based Localizing Network for Natural Language Video 
-Localization" (**ACL 2020**, long paper): 
-[https://www.aclweb.org/anthology/2020.acl-main.585.pdf](https://www.aclweb.org/anthology/2020.acl-main.585.pdf), 
-[https://arxiv.org/abs/2004.13931](https://arxiv.org/abs/2004.13931).
+Localization" (**ACL 2020**, long paper): [ACL version](https://www.aclweb.org/anthology/2020.acl-main.585.pdf), 
+[ArXiv version](https://arxiv.org/abs/2004.13931).
 
 ![overview](/figures/overview.jpg)
 
 ## Prerequisites
-- python 3.x with tensorflow (`1.13.1`), pytorch (`<=1.1.0`), torchvision, opencv-python, moviepy, tqdm, nltk
+- python 3.x with tensorflow (`1.13.1`), pytorch (`1.1.0`), torchvision, opencv-python, moviepy, tqdm, nltk, 
+  transformers
 - youtube-dl
 - cuda10, cudnn
 
@@ -22,7 +22,7 @@ conda install -c anaconda cudatoolkit=10.0 cudnn
 conda install tensorflow-gpu==1.13.1
 conda install -c anaconda nltk pillow=6.2.1
 conda install pytorch==1.1.0 torchvision==0.3.0 cudatoolkit=10.0 -c pytorch
-conda install -c conda-forge opencv moviepy tqdm youtube-dl
+conda install -c conda-forge transformers opencv moviepy tqdm youtube-dl
 
 # download punkt for word tokenizer
 python3.7 -m nltk.downloader punkt
@@ -34,6 +34,7 @@ here: [[data preparation]](/prepare). Alternatively, you can download the prepar
 data from [Box Drive](https://app.box.com/s/anywugpxlt134r9hzqf5v3v5xohxliwu), and save them to the `./data/` folder.
 
 ## Quick Start
+### TensorFlow version
 **Data Pre-processing**  
 ```shell script
 # pre-processing the Charades-STA dataset, `feature` argument indicates whether to use 
@@ -75,6 +76,22 @@ python run_activitynet.py --mode test
 python run_tacos.py --mode test
 ```
 
+### Pytorch Version
+Take the Charades-STA as an example:
+```shell script
+python main.py --task charades \  # specify task (charades, activitynet, tacos)
+               --mode train \  # train or test
+               --max_pos_len 128 \  # maximal position sequence length allowed
+               --word_dim 300 \  # word embedding dimension (GloVe)
+               --visual_dim 1024 \  # input video feature dimension
+               --dim 128 \  # hidden size of the model
+               --num_heads 8 \  # number of heads in transformer block
+               --epochs 100 \  # total training epochs
+               --model_dir ckpt_t7 \  # path to save trained model weights
+               --eval_period 500  # evaluation period during training
+```
+> Note the pytorch codes are not adapted to achieve the results in the paper yet!!!!!! Will do it later.
+
 ## Citation
 If you feel this project helpful to your research, please cite our work.
 ```
@@ -87,6 +104,6 @@ If you feel this project helpful to your research, please cite our work.
     address = "Online",
     publisher = "Association for Computational Linguistics",
     url = "https://www.aclweb.org/anthology/2020.acl-main.585",
-    pages = "6543--6554",
+    pages = "6543--6554"
 }
 ```
