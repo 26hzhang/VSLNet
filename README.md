@@ -6,6 +6,10 @@ Localization" (**ACL 2020**, long paper): [ACL version](https://www.aclweb.org/a
 
 ![overview](/figures/overview.jpg)
 
+## Updates
+- 2021/06/06: rewrite and optimize the codes, and upload complete visual features to the Box drive. Add the stacked
+transformers predictor head (VSLNet with transformer head performs better than that of rnn head in general).
+
 ## Prerequisites
 - python 3.x with tensorflow (`1.13.1`), pytorch (`1.1.0`), torchvision, opencv-python, moviepy, tqdm, nltk, 
   transformers
@@ -23,74 +27,48 @@ conda install tensorflow-gpu==1.13.1
 conda install -c anaconda nltk pillow=6.2.1
 conda install pytorch==1.1.0 torchvision==0.3.0 cudatoolkit=10.0 -c pytorch
 conda install -c conda-forge transformers opencv moviepy tqdm youtube-dl
-
 # download punkt for word tokenizer
 python3.7 -m nltk.downloader punkt
 ```
 
 ## Preparation
-The details about how to prepare the `Charades-STA`, `ActivityNet Captions` and `TACoS` datasets are summarized 
-here: [[data preparation]](/prepare). Alternatively, you can download the prepared visual features, word embeddings and 
-data from [Box Drive](https://app.box.com/s/anywugpxlt134r9hzqf5v3v5xohxliwu), and save them to the `./data/` folder.
+The details about how to prepare the `Charades-STA`, `ActivityNet Captions` and `TACoS` features are summarized 
+here: [[data preparation]](/prepare). Alternatively, you can download the prepared visual features from 
+[Box Drive](https://app.box.com/s/h0sxa5klco6qve5ahnz50ly2nksmuedw), and place them to the `./data/` directory.
+Download the word embeddings from [here](http://nlp.stanford.edu/data/glove.840B.300d.zip) and place it to 
+`./data/features/` directory.
 
 ## Quick Start
 ### TensorFlow version
-**Data Pre-processing**  
+**Train** and **Test**
 ```shell script
-# pre-processing the Charades-STA dataset, `feature` argument indicates whether to use 
-# visual features finetuned on Charades dataset (`finetune`) or w/o finetune (`raw`).
-python run_charades.py --mode prepro --feature finetune
-
-# pre-processing the ActivityNet Captions dataset
-python run_activitynet.py --mode prepro
-
-# pre-processing the TACoS dataset
-python run_tacos.py --mode prepro
-```
-You can download the pre-processed datasets from [Box Drive](https://app.box.com/s/qhccf6f1dm4llcto3vh34xciz3sbys92), 
-and save them to the `./datasets/` folder.
-
-**Train**
-```shell script
+# processed dataset will be automatically generated or loaded if exist
+# set `--mode test` for evaluation
+# set `--predictor transformer` to change the answer predictor from stacked lstms to stacked transformers
 # train VSLNet on Charades-STA dataset
-python run_charades.py --mode train
-
+python main.py --task charades --predictor rnn --mode train
 # train VSLNet on ActivityNet Captions dataset
-python run_activitynet.py --mode train
-
+python main.py --task activitynet --predictor rnn --mode train
 # train VSLNet on TACoS dataset
-python run_tacos.py --mode train
+python main.py --task tacos --predictor rnn --mode train
 ```
-Please refer each python file for more parameter settings. You can also download the trained weights for each task from 
-[Box Drive](https://app.box.com/s/40wn9kh2eqpnel5ofjcr2qqsu9uyn6ba), and save them to the `./ckpt/` folder.
-
-**Test**
-```shell script
-# test VSLNet on Charades-STA dataset
-python run_charades.py --mode test
-
-# test VSLNet on ActivityNet Captions dataset
-python run_activitynet.py --mode test
-
-# test VSLNet on TACoS dataset
-python run_tacos.py --mode test
-```
+Please refer each python file for more parameter settings. You can also download the checkpoints for each task 
+from [here](https://app.box.com/s/f20aeutwp2wg8c5laaqtbfdg864g8mj0) and the corresponding processed dataset from
+[here](https://app.box.com/s/065efky2sjjgc2xxzyelast15y7tsehs), and save them to the `./ckpt/` and `./datasets/` 
+directories, respectively. More hyper-parameter settings are in the `main.py`.
 
 ### Pytorch Version
-Take the Charades-STA as an example:
+**Train** and **Test**
 ```shell script
-python main.py --task charades \  # specify task (charades, activitynet, tacos)
-               --mode train \  # train or test
-               --max_pos_len 128 \  # maximal position sequence length allowed
-               --word_dim 300 \  # word embedding dimension (GloVe)
-               --visual_dim 1024 \  # input video feature dimension
-               --dim 128 \  # hidden size of the model
-               --num_heads 8 \  # number of heads in transformer block
-               --epochs 100 \  # total training epochs
-               --model_dir ckpt_t7 \  # path to save trained model weights
-               --eval_period 500  # evaluation period during training
+# the same as the usage of tf version
+# train VSLNet on Charades-STA dataset
+python main.py --task charades --predictor rnn --mode train
+# train VSLNet on ActivityNet Captions dataset
+python main.py --task activitynet --predictor rnn --mode train
+# train VSLNet on TACoS dataset
+python main.py --task tacos --predictor rnn --mode train
 ```
-> Note the pytorch codes are not adapted to achieve the results in the paper yet!!!!!! Will do it later.
+> For unknown reasons, the performance of PyTorch codes is inferior to that of TensorFlow codes on some datasets.
 
 ## Citation
 If you feel this project helpful to your research, please cite our work.

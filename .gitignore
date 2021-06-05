@@ -130,10 +130,11 @@ dmypy.json
 
 # add
 .idea/
+.vs_code/
 ckpt/
 ckpt_t7/
 ckpt*/
-data/
+data/features/
 datasets/
 .DS_Store
 *.DS_Store
