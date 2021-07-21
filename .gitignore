@@ -130,7 +130,7 @@ dmypy.json
 
 # add
 .idea/
-.vs_code/
+.vscode/
 ckpt/
 ckpt_t7/
 ckpt*/
