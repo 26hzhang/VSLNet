@@ -1,7 +1,12 @@
 import tensorflow as tf
 from model.ops import create_optimizer, count_params
 from model.layers import word_embedding_lookup, char_embedding_lookup, conv1d, video_query_attention, highlight_layer
-from model.layers import context_query_concat, feature_encoder, conditioned_predictor, localization_loss, layer_norm
+from model.layers import context_query_concat, feature_encoder, conditioned_predictor, localization_loss
+
+if tf.__version__.startswith('2'):
+    tf = tf.compat.v1
+    tf.disable_v2_behavior()
+    tf.disable_eager_execution()
 
 
 class VSLNet:

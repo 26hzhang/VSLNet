@@ -2,6 +2,11 @@ import math
 import tensorflow as tf
 from model.ops import get_shape_list, mask_logits, trilinear_attention, regularizer
 
+if tf.__version__.startswith('2'):
+    tf = tf.compat.v1
+    tf.disable_v2_behavior()
+    tf.disable_eager_execution()
+
 
 def layer_norm(inputs, epsilon=1e-6, reuse=None, name='layer_norm'):
     """Layer normalize the tensor x, averaging over the last dimension."""

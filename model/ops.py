@@ -2,7 +2,13 @@ import re
 import numpy as np
 import tensorflow as tf
 
-regularizer = tf.contrib.layers.l2_regularizer(scale=3e-7)
+if tf.__version__.startswith('2'):
+    tf = tf.compat.v1
+    tf.disable_v2_behavior()
+    tf.disable_eager_execution()
+    regularizer = tf.keras.regularizers.l2(l2=3e-7)
+else:
+    regularizer = tf.contrib.layers.l2_regularizer(scale=3e-7)
 
 
 def count_params(scope=None):

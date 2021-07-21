@@ -4,6 +4,11 @@ import tensorflow as tf
 from tqdm import tqdm
 from util.data_util import index_to_time
 
+if tf.__version__.startswith('2'):
+    tf = tf.compat.v1
+    tf.disable_v2_behavior()
+    tf.disable_eager_execution()
+
 
 def set_tf_config(seed, gpu_idx):
     # os environment

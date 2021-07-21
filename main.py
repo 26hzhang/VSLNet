@@ -8,6 +8,11 @@ from util.data_util import load_video_features, save_json, load_json
 from util.data_loader import TrainLoader, TestLoader
 from util.runner_utils import set_tf_config, get_feed_dict, write_tf_summary, eval_test
 
+if tf.__version__.startswith('2'):
+    tf = tf.compat.v1
+    tf.disable_v2_behavior()
+    tf.disable_eager_execution()
+
 parser = argparse.ArgumentParser()
 # data parameters
 parser.add_argument('--save_dir', type=str, default='datasets', help='path to save processed dataset')
@@ -45,6 +50,9 @@ configs = parser.parse_args()
 set_tf_config(configs.seed, configs.gpu_idx)
 
 # prepare or load dataset
+if tf.__version__.startswith('2'):
+    configs.save_dir = 'datasets_tf2'  # avoid `ValueError: unsupported pickle protocol: 5`
+    configs.model_dir = 'ckpt_tf2'
 dataset = gen_or_load_dataset(configs)
 configs.char_size = dataset['n_chars']
 

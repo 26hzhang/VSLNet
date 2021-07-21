@@ -12,7 +12,7 @@ from util.runner_utils_t7 import set_th_config, convert_length_to_mask, eval_tes
 
 parser = argparse.ArgumentParser()
 # data parameters
-parser.add_argument('--save_dir', type=str, default='datasets', help='path to save processed dataset')
+parser.add_argument('--save_dir', type=str, default='datasets_t7', help='path to save processed dataset')
 parser.add_argument('--task', type=str, default='charades', help='target task')
 parser.add_argument('--fv', type=str, default='new', help='[new | org] for visual features')
 parser.add_argument('--max_pos_len', type=int, default=128, help='maximal position sequence length allowed')
