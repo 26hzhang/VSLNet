@@ -9,6 +9,17 @@ Localization" (**ACL 2020**, long paper): [ACL version](https://www.aclweb.org/a
 ## Updates
 - 2021/06/06: rewrite and optimize the codes, and upload complete visual features to the Box drive. Add the stacked
 transformers predictor head (VSLNet with transformer head performs better than that of rnn head in general).
+- 2021/07/21: add support to TensorFlow 2.x (test on Tensorflow `2.5.0` with cuda `11.2` and cudnn `8.2`).
+```shell
+# preparing environment for TensorFlow 2.5.0
+conda create --name vslnet_tf2 python=3.9
+conda activate vslnet_tf2
+conda install -c conda-forge cudnn  # will install cuda 11.2 automatically
+pip install tensorflow-gpu==2.5.0
+pip install nltk
+pip install torch torchvision torchaudio
+python3.9 -m nltk.downloader punkt
+```
 
 ## Prerequisites
 - python 3.x with tensorflow (`1.13.1`), pytorch (`1.1.0`), torchvision, opencv-python, moviepy, tqdm, nltk, 
