@@ -1,6 +1,6 @@
 # Span-based Localizing Network for Natural Language Video Localization
 
-This is **TensorFlow** implementation for the paper "Span-based Localizing Network for Natural Language Video 
+This is implementation for the paper "Span-based Localizing Network for Natural Language Video 
 Localization" (**ACL 2020**, long paper): [ACL version](https://www.aclweb.org/anthology/2020.acl-main.585.pdf), 
 [ArXiv version](https://arxiv.org/abs/2004.13931).
 
