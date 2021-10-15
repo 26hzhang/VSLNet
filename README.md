@@ -96,3 +96,13 @@ If you feel this project helpful to your research, please cite our work.
     pages = "6543--6554"
 }
 ```
+and
+```
+@article{zhang2021natural,
+    author={H. {Zhang} and A. {Sun} and W. {Jing} and L. {Zhen} and J. T. {Zhou} and R. S. M. {Goh}},
+    journal={IEEE Transactions on Pattern Analysis and Machine Intelligence}, 
+	  title={Natural Language Video Localization: A Revisit in Span-based Question Answering Framework}, 
+	  year={2021},
+	  doi={10.1109/TPAMI.2021.3060449}
+}
+```
